@@ -1,0 +1,17 @@
+{
+  "name": "weather-checker",
+  "version": "1.0.0",
+  "description": "Slackbot that checks the weather using Camunda 8 NodeJS SDK.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Samantha Holstine",
+  "license": "ISC",
+  "dependencies": {
+    "@camunda8/sdk": "^8.6.6",
+    "@slack/bolt": "^3.18.0",
+    "@slack/web-api": "^7.1.0",
+    "dotenv": "^16.4.5"
+  }
+}

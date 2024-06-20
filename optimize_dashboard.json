@@ -1,0 +1,893 @@
+[
+  {
+    "id": "7530f4cf-b68b-4de5-9114-e8e0974177e0",
+    "exportEntityType": "single_process_report",
+    "name": "Weather Reports Queried",
+    "description": null,
+    "sourceIndexVersion": 11,
+    "collectionId": null,
+    "data": {
+      "configuration": {
+        "color": "#1991c8",
+        "aggregationTypes": [
+          {
+            "type": "avg",
+            "value": null
+          }
+        ],
+        "userTaskDurationTimes": [
+          "total"
+        ],
+        "showInstanceCount": false,
+        "pointMarkers": true,
+        "precision": null,
+        "hideRelativeValue": false,
+        "hideAbsoluteValue": false,
+        "alwaysShowRelative": false,
+        "alwaysShowAbsolute": false,
+        "showGradientBars": true,
+        "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" xmlns:zeebe=\"http://camunda.org/schema/zeebe/1.0\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" id=\"Definitions_1\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Web Modeler\" exporterVersion=\"b1a091a\" modeler:executionPlatform=\"Camunda Cloud\" modeler:executionPlatformVersion=\"8.5.0\" camunda:diagramRelationId=\"aa636b87-5ad6-40bb-89da-42fcd1b8f783\">\n  <bpmn:process id=\"node-slackbot-demo\" name=\"Weather Reporter\" isExecutable=\"true\">\n    <bpmn:startEvent id=\"StartEvent_1\" name=\"Start process with specific city\">\n      <bpmn:extensionElements />\n      <bpmn:outgoing>Flow_0z7iuf8</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:serviceTask id=\"Activity_1p1d6md\" name=\"Check the weather\" zeebe:modelerTemplate=\"io.camunda.connectors.HttpJson.v2\" zeebe:modelerTemplateVersion=\"7\" zeebe:modelerTemplateIcon=\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"io.camunda:http-json:1\" retries=\"3\" />\n        <zeebe:ioMapping>\n          <zeebe:input source=\"noAuth\" target=\"authentication.type\" />\n          <zeebe:input source=\"GET\" target=\"method\" />\n          <zeebe:input source=\"=&#34;https://api.api-ninjas.com/v1/weather?city=&#34; + city\" target=\"url\" />\n          <zeebe:input source=\"= {X-Api-Key: &#34;{{secrets.ApiNinja}}&#34; } \" target=\"queryParameters\" />\n          <zeebe:input source=\"20\" target=\"connectionTimeoutInSeconds\" />\n          <zeebe:input source=\"20\" target=\"readTimeoutInSeconds\" />\n        </zeebe:ioMapping>\n        <zeebe:taskHeaders>\n          <zeebe:header key=\"resultVariable\" value=\"result\" />\n          <zeebe:header key=\"resultExpression\" value=\"={&#10;temperature: response.body.temp,&#10;  max_temp: response.body.max_temp,&#10;  min_temp: response.body.min_temp,&#10;  feels_like: response.body.feels_like&#10;}\" />\n          <zeebe:header key=\"retryBackoff\" value=\"PT0S\" />\n        </zeebe:taskHeaders>\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_0z7iuf8</bpmn:incoming>\n      <bpmn:outgoing>Flow_1q12hk9</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_1q12hk9\" sourceRef=\"Activity_1p1d6md\" targetRef=\"Activity_0p6cadr\" />\n    <bpmn:endEvent id=\"Event_17dzijs\" name=\"End Process\">\n      <bpmn:incoming>Flow_0p8n1rh</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0p8n1rh\" sourceRef=\"Activity_0p6cadr\" targetRef=\"Event_17dzijs\" />\n    <bpmn:serviceTask id=\"Activity_0p6cadr\" name=\"Report weather to user\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"service-task\" />\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_1q12hk9</bpmn:incoming>\n      <bpmn:outgoing>Flow_0p8n1rh</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_0z7iuf8\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_1p1d6md\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"node-slackbot-demo\">\n      <bpmndi:BPMNShape id=\"Event_1xb1vte_di\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"172\" y=\"100\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"147\" y=\"143\" width=\"88\" height=\"27\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1ned5n3_di\" bpmnElement=\"Activity_1p1d6md\">\n        <dc:Bounds x=\"330\" y=\"78\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_17dzijs_di\" bpmnElement=\"Event_17dzijs\">\n        <dc:Bounds x=\"792\" y=\"100\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"779\" y=\"143\" width=\"63\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1dqkia8_di\" bpmnElement=\"Activity_0p6cadr\">\n        <dc:Bounds x=\"560\" y=\"78\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_1q12hk9_di\" bpmnElement=\"Flow_1q12hk9\">\n        <di:waypoint x=\"430\" y=\"118\" />\n        <di:waypoint x=\"560\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0p8n1rh_di\" bpmnElement=\"Flow_0p8n1rh\">\n        <di:waypoint x=\"660\" y=\"118\" />\n        <di:waypoint x=\"792\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0z7iuf8_di\" bpmnElement=\"Flow_0z7iuf8\">\n        <di:waypoint x=\"208\" y=\"118\" />\n        <di:waypoint x=\"330\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
+        "tableColumns": {
+          "includeNewVariables": false,
+          "excludedColumns": [],
+          "includedColumns": [],
+          "columnOrder": []
+        },
+        "targetValue": {
+          "countChart": {
+            "isBelow": false,
+            "value": "100"
+          },
+          "durationProgress": {
+            "baseline": {
+              "unit": "hours",
+              "value": "0"
+            },
+            "target": {
+              "unit": "hours",
+              "value": "2",
+              "isBelow": false
+            }
+          },
+          "active": false,
+          "countProgress": {
+            "baseline": "0",
+            "target": "100",
+            "isBelow": false
+          },
+          "durationChart": {
+            "unit": "hours",
+            "isBelow": false,
+            "value": "2"
+          },
+          "isKpi": null
+        },
+        "heatmapTargetValue": {
+          "active": false,
+          "values": {}
+        },
+        "groupByDateVariableUnit": "automatic",
+        "distributeByDateVariableUnit": "automatic",
+        "customBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": null,
+          "baseline": "0.0",
+          "baselineUnit": null
+        },
+        "distributeByCustomBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": null,
+          "baseline": "0.0",
+          "baselineUnit": null
+        },
+        "sorting": {
+          "by": "key",
+          "order": "desc"
+        },
+        "processPart": null,
+        "measureVisualizations": {
+          "frequency": "bar",
+          "duration": "line"
+        },
+        "stackedBar": false,
+        "horizontalBar": false,
+        "logScale": false,
+        "yLabel": "Process instance Count",
+        "xLabel": "None"
+      },
+      "definitions": [
+        {
+          "identifier": "definition",
+          "key": "node-slackbot-demo",
+          "name": "Weather Reporter",
+          "displayName": "Weather Reporter",
+          "versions": [
+            "all"
+          ],
+          "tenantIds": [
+            "<default>"
+          ]
+        }
+      ],
+      "filter": [],
+      "view": {
+        "entity": "processInstance",
+        "properties": [
+          "frequency"
+        ]
+      },
+      "groupBy": {
+        "type": "none",
+        "value": null
+      },
+      "distributedBy": {
+        "type": "none",
+        "value": null
+      },
+      "visualization": "number",
+      "managementReport": false,
+      "instantPreviewReport": false,
+      "userTaskReport": false
+    }
+  },
+  {
+    "id": "fdf3f09f-314a-4f04-99ee-882de2990200",
+    "exportEntityType": "single_process_report",
+    "name": "Locate incident hotspots on a heatmap",
+    "description": "Locate incident hotspots visualized as heatmap for incidents.",
+    "sourceIndexVersion": 11,
+    "collectionId": null,
+    "data": {
+      "configuration": {
+        "color": "#1991c8",
+        "aggregationTypes": [
+          {
+            "type": "avg",
+            "value": null
+          }
+        ],
+        "userTaskDurationTimes": [
+          "total"
+        ],
+        "showInstanceCount": false,
+        "pointMarkers": true,
+        "precision": null,
+        "hideRelativeValue": false,
+        "hideAbsoluteValue": false,
+        "alwaysShowRelative": false,
+        "alwaysShowAbsolute": false,
+        "showGradientBars": true,
+        "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" xmlns:zeebe=\"http://camunda.org/schema/zeebe/1.0\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" id=\"Definitions_1\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Web Modeler\" exporterVersion=\"b1a091a\" modeler:executionPlatform=\"Camunda Cloud\" modeler:executionPlatformVersion=\"8.5.0\" camunda:diagramRelationId=\"aa636b87-5ad6-40bb-89da-42fcd1b8f783\">\n  <bpmn:process id=\"node-slackbot-demo\" name=\"Weather Reporter\" isExecutable=\"true\">\n    <bpmn:startEvent id=\"StartEvent_1\" name=\"Start process with specific city\">\n      <bpmn:extensionElements />\n      <bpmn:outgoing>Flow_0z7iuf8</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:serviceTask id=\"Activity_1p1d6md\" name=\"Check the weather\" zeebe:modelerTemplate=\"io.camunda.connectors.HttpJson.v2\" zeebe:modelerTemplateVersion=\"7\" zeebe:modelerTemplateIcon=\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"io.camunda:http-json:1\" retries=\"3\" />\n        <zeebe:ioMapping>\n          <zeebe:input source=\"noAuth\" target=\"authentication.type\" />\n          <zeebe:input source=\"GET\" target=\"method\" />\n          <zeebe:input source=\"=&#34;https://api.api-ninjas.com/v1/weather?city=&#34; + city\" target=\"url\" />\n          <zeebe:input source=\"= {X-Api-Key: &#34;{{secrets.ApiNinja}}&#34; } \" target=\"queryParameters\" />\n          <zeebe:input source=\"20\" target=\"connectionTimeoutInSeconds\" />\n          <zeebe:input source=\"20\" target=\"readTimeoutInSeconds\" />\n        </zeebe:ioMapping>\n        <zeebe:taskHeaders>\n          <zeebe:header key=\"resultVariable\" value=\"result\" />\n          <zeebe:header key=\"resultExpression\" value=\"={&#10;temperature: response.body.temp,&#10;  max_temp: response.body.max_temp,&#10;  min_temp: response.body.min_temp,&#10;  feels_like: response.body.feels_like&#10;}\" />\n          <zeebe:header key=\"retryBackoff\" value=\"PT0S\" />\n        </zeebe:taskHeaders>\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_0z7iuf8</bpmn:incoming>\n      <bpmn:outgoing>Flow_1q12hk9</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_1q12hk9\" sourceRef=\"Activity_1p1d6md\" targetRef=\"Activity_0p6cadr\" />\n    <bpmn:endEvent id=\"Event_17dzijs\" name=\"End Process\">\n      <bpmn:incoming>Flow_0p8n1rh</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0p8n1rh\" sourceRef=\"Activity_0p6cadr\" targetRef=\"Event_17dzijs\" />\n    <bpmn:serviceTask id=\"Activity_0p6cadr\" name=\"Report weather to user\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"service-task\" />\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_1q12hk9</bpmn:incoming>\n      <bpmn:outgoing>Flow_0p8n1rh</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_0z7iuf8\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_1p1d6md\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"node-slackbot-demo\">\n      <bpmndi:BPMNShape id=\"Event_1xb1vte_di\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"172\" y=\"100\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"147\" y=\"143\" width=\"88\" height=\"27\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1ned5n3_di\" bpmnElement=\"Activity_1p1d6md\">\n        <dc:Bounds x=\"330\" y=\"78\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_17dzijs_di\" bpmnElement=\"Event_17dzijs\">\n        <dc:Bounds x=\"792\" y=\"100\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"779\" y=\"143\" width=\"63\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1dqkia8_di\" bpmnElement=\"Activity_0p6cadr\">\n        <dc:Bounds x=\"560\" y=\"78\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_1q12hk9_di\" bpmnElement=\"Flow_1q12hk9\">\n        <di:waypoint x=\"430\" y=\"118\" />\n        <di:waypoint x=\"560\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0p8n1rh_di\" bpmnElement=\"Flow_0p8n1rh\">\n        <di:waypoint x=\"660\" y=\"118\" />\n        <di:waypoint x=\"792\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0z7iuf8_di\" bpmnElement=\"Flow_0z7iuf8\">\n        <di:waypoint x=\"208\" y=\"118\" />\n        <di:waypoint x=\"330\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
+        "tableColumns": {
+          "includeNewVariables": false,
+          "excludedColumns": [],
+          "includedColumns": [],
+          "columnOrder": []
+        },
+        "targetValue": {
+          "countChart": {
+            "isBelow": false,
+            "value": "100"
+          },
+          "durationProgress": {
+            "baseline": {
+              "unit": "hours",
+              "value": "0"
+            },
+            "target": {
+              "unit": "hours",
+              "value": "2",
+              "isBelow": false
+            }
+          },
+          "active": false,
+          "countProgress": {
+            "baseline": "0",
+            "target": "100",
+            "isBelow": false
+          },
+          "durationChart": {
+            "unit": "hours",
+            "isBelow": false,
+            "value": "2"
+          },
+          "isKpi": null
+        },
+        "heatmapTargetValue": {
+          "active": false,
+          "values": {}
+        },
+        "groupByDateVariableUnit": "automatic",
+        "distributeByDateVariableUnit": "automatic",
+        "customBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": null,
+          "baseline": "0.0",
+          "baselineUnit": null
+        },
+        "distributeByCustomBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": null,
+          "baseline": "0.0",
+          "baselineUnit": null
+        },
+        "sorting": null,
+        "processPart": null,
+        "measureVisualizations": {
+          "frequency": "bar",
+          "duration": "line"
+        },
+        "stackedBar": false,
+        "horizontalBar": false,
+        "logScale": false,
+        "yLabel": "",
+        "xLabel": ""
+      },
+      "definitions": [
+        {
+          "identifier": "definition",
+          "key": "node-slackbot-demo",
+          "name": "Weather Reporter",
+          "displayName": "Weather Reporter",
+          "versions": [
+            "all"
+          ],
+          "tenantIds": [
+            "<default>"
+          ]
+        }
+      ],
+      "filter": [],
+      "view": {
+        "entity": "incident",
+        "properties": [
+          "duration"
+        ]
+      },
+      "groupBy": {
+        "type": "flowNodes",
+        "value": null
+      },
+      "distributedBy": {
+        "type": "none",
+        "value": null
+      },
+      "visualization": "heat",
+      "managementReport": false,
+      "instantPreviewReport": false,
+      "userTaskReport": false
+    }
+  },
+  {
+    "id": "0b755041-1edc-4c15-8008-edbf45e9d7d3",
+    "exportEntityType": "single_process_report",
+    "name": "Locate bottlenecks on a heatmap",
+    "description": "Locate duration or count bottlenecks visualized as heatmap for flow nodes.",
+    "sourceIndexVersion": 11,
+    "collectionId": null,
+    "data": {
+      "configuration": {
+        "color": "#1991c8",
+        "aggregationTypes": [
+          {
+            "type": "avg",
+            "value": null
+          }
+        ],
+        "userTaskDurationTimes": [
+          "total"
+        ],
+        "showInstanceCount": false,
+        "pointMarkers": true,
+        "precision": null,
+        "hideRelativeValue": false,
+        "hideAbsoluteValue": false,
+        "alwaysShowRelative": false,
+        "alwaysShowAbsolute": false,
+        "showGradientBars": true,
+        "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" xmlns:zeebe=\"http://camunda.org/schema/zeebe/1.0\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" id=\"Definitions_1\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Web Modeler\" exporterVersion=\"b1a091a\" modeler:executionPlatform=\"Camunda Cloud\" modeler:executionPlatformVersion=\"8.5.0\" camunda:diagramRelationId=\"aa636b87-5ad6-40bb-89da-42fcd1b8f783\">\n  <bpmn:process id=\"node-slackbot-demo\" name=\"Weather Reporter\" isExecutable=\"true\">\n    <bpmn:startEvent id=\"StartEvent_1\" name=\"Start process with specific city\">\n      <bpmn:extensionElements />\n      <bpmn:outgoing>Flow_0z7iuf8</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:serviceTask id=\"Activity_1p1d6md\" name=\"Check the weather\" zeebe:modelerTemplate=\"io.camunda.connectors.HttpJson.v2\" zeebe:modelerTemplateVersion=\"7\" zeebe:modelerTemplateIcon=\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"io.camunda:http-json:1\" retries=\"3\" />\n        <zeebe:ioMapping>\n          <zeebe:input source=\"noAuth\" target=\"authentication.type\" />\n          <zeebe:input source=\"GET\" target=\"method\" />\n          <zeebe:input source=\"=&#34;https://api.api-ninjas.com/v1/weather?city=&#34; + city\" target=\"url\" />\n          <zeebe:input source=\"= {X-Api-Key: &#34;{{secrets.ApiNinja}}&#34; } \" target=\"queryParameters\" />\n          <zeebe:input source=\"20\" target=\"connectionTimeoutInSeconds\" />\n          <zeebe:input source=\"20\" target=\"readTimeoutInSeconds\" />\n        </zeebe:ioMapping>\n        <zeebe:taskHeaders>\n          <zeebe:header key=\"resultVariable\" value=\"result\" />\n          <zeebe:header key=\"resultExpression\" value=\"={&#10;temperature: response.body.temp,&#10;  max_temp: response.body.max_temp,&#10;  min_temp: response.body.min_temp,&#10;  feels_like: response.body.feels_like&#10;}\" />\n          <zeebe:header key=\"retryBackoff\" value=\"PT0S\" />\n        </zeebe:taskHeaders>\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_0z7iuf8</bpmn:incoming>\n      <bpmn:outgoing>Flow_1q12hk9</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_1q12hk9\" sourceRef=\"Activity_1p1d6md\" targetRef=\"Activity_0p6cadr\" />\n    <bpmn:endEvent id=\"Event_17dzijs\" name=\"End Process\">\n      <bpmn:incoming>Flow_0p8n1rh</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0p8n1rh\" sourceRef=\"Activity_0p6cadr\" targetRef=\"Event_17dzijs\" />\n    <bpmn:serviceTask id=\"Activity_0p6cadr\" name=\"Report weather to user\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"service-task\" />\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_1q12hk9</bpmn:incoming>\n      <bpmn:outgoing>Flow_0p8n1rh</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_0z7iuf8\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_1p1d6md\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"node-slackbot-demo\">\n      <bpmndi:BPMNShape id=\"Event_1xb1vte_di\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"172\" y=\"100\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"147\" y=\"143\" width=\"88\" height=\"27\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1ned5n3_di\" bpmnElement=\"Activity_1p1d6md\">\n        <dc:Bounds x=\"330\" y=\"78\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_17dzijs_di\" bpmnElement=\"Event_17dzijs\">\n        <dc:Bounds x=\"792\" y=\"100\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"779\" y=\"143\" width=\"63\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1dqkia8_di\" bpmnElement=\"Activity_0p6cadr\">\n        <dc:Bounds x=\"560\" y=\"78\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_1q12hk9_di\" bpmnElement=\"Flow_1q12hk9\">\n        <di:waypoint x=\"430\" y=\"118\" />\n        <di:waypoint x=\"560\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0p8n1rh_di\" bpmnElement=\"Flow_0p8n1rh\">\n        <di:waypoint x=\"660\" y=\"118\" />\n        <di:waypoint x=\"792\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0z7iuf8_di\" bpmnElement=\"Flow_0z7iuf8\">\n        <di:waypoint x=\"208\" y=\"118\" />\n        <di:waypoint x=\"330\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
+        "tableColumns": {
+          "includeNewVariables": false,
+          "excludedColumns": [],
+          "includedColumns": [],
+          "columnOrder": []
+        },
+        "targetValue": {
+          "countChart": {
+            "isBelow": false,
+            "value": "100"
+          },
+          "durationProgress": {
+            "baseline": {
+              "unit": "hours",
+              "value": "0"
+            },
+            "target": {
+              "unit": "hours",
+              "value": "2",
+              "isBelow": false
+            }
+          },
+          "active": false,
+          "countProgress": {
+            "baseline": "0",
+            "target": "100",
+            "isBelow": false
+          },
+          "durationChart": {
+            "unit": "hours",
+            "isBelow": false,
+            "value": "2"
+          },
+          "isKpi": null
+        },
+        "heatmapTargetValue": {
+          "active": false,
+          "values": {}
+        },
+        "groupByDateVariableUnit": "automatic",
+        "distributeByDateVariableUnit": "automatic",
+        "customBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": null,
+          "baseline": "0.0",
+          "baselineUnit": null
+        },
+        "distributeByCustomBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": null,
+          "baseline": "0.0",
+          "baselineUnit": null
+        },
+        "sorting": null,
+        "processPart": null,
+        "measureVisualizations": {
+          "frequency": "bar",
+          "duration": "line"
+        },
+        "stackedBar": false,
+        "horizontalBar": false,
+        "logScale": false,
+        "yLabel": "",
+        "xLabel": ""
+      },
+      "definitions": [
+        {
+          "identifier": "definition",
+          "key": "node-slackbot-demo",
+          "name": "Weather Reporter",
+          "displayName": "Weather Reporter",
+          "versions": [
+            "all"
+          ],
+          "tenantIds": [
+            "<default>"
+          ]
+        }
+      ],
+      "filter": [],
+      "view": {
+        "entity": "flowNode",
+        "properties": [
+          "duration"
+        ]
+      },
+      "groupBy": {
+        "type": "flowNodes",
+        "value": null
+      },
+      "distributedBy": {
+        "type": "none",
+        "value": null
+      },
+      "visualization": "heat",
+      "managementReport": false,
+      "instantPreviewReport": false,
+      "userTaskReport": false
+    }
+  },
+  {
+    "id": "74794b17-3259-47a5-abe7-a6a80f762ca3",
+    "exportEntityType": "single_process_report",
+    "name": "Average Min Temperature",
+    "description": null,
+    "sourceIndexVersion": 11,
+    "collectionId": null,
+    "data": {
+      "configuration": {
+        "color": "#1991c8",
+        "aggregationTypes": [
+          {
+            "type": "avg",
+            "value": null
+          }
+        ],
+        "userTaskDurationTimes": [
+          "total"
+        ],
+        "showInstanceCount": false,
+        "pointMarkers": true,
+        "precision": null,
+        "hideRelativeValue": false,
+        "hideAbsoluteValue": false,
+        "alwaysShowRelative": false,
+        "alwaysShowAbsolute": false,
+        "showGradientBars": true,
+        "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" xmlns:zeebe=\"http://camunda.org/schema/zeebe/1.0\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" id=\"Definitions_1\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Web Modeler\" exporterVersion=\"cf76b8f\" modeler:executionPlatform=\"Camunda Cloud\" modeler:executionPlatformVersion=\"8.5.0\" camunda:diagramRelationId=\"aa636b87-5ad6-40bb-89da-42fcd1b8f783\">\n  <bpmn:process id=\"Process_0hjztfx\" name=\"Weather Checker 2\" isExecutable=\"true\">\n    <bpmn:startEvent id=\"StartEvent_1\" name=\"start process\">\n      <bpmn:extensionElements />\n      <bpmn:outgoing>Flow_0z7iuf8</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:serviceTask id=\"Activity_1p1d6md\" name=\"Check the weather\" zeebe:modelerTemplate=\"io.camunda.connectors.HttpJson.v2\" zeebe:modelerTemplateVersion=\"7\" zeebe:modelerTemplateIcon=\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"io.camunda:http-json:1\" retries=\"3\" />\n        <zeebe:ioMapping>\n          <zeebe:input source=\"noAuth\" target=\"authentication.type\" />\n          <zeebe:input source=\"GET\" target=\"method\" />\n          <zeebe:input source=\"=&#34;https://api.api-ninjas.com/v1/weather?city=&#34; + city\" target=\"url\" />\n          <zeebe:input source=\"= {X-Api-Key: &#34;{{secrets.ApiNinja}}&#34; } \" target=\"queryParameters\" />\n          <zeebe:input source=\"20\" target=\"connectionTimeoutInSeconds\" />\n          <zeebe:input source=\"20\" target=\"readTimeoutInSeconds\" />\n        </zeebe:ioMapping>\n        <zeebe:taskHeaders>\n          <zeebe:header key=\"resultVariable\" value=\"result\" />\n          <zeebe:header key=\"resultExpression\" value=\"={&#10;temperature: response.body.temp,&#10;  max_temp: response.body.max_temp,&#10;  min_temp: response.body.min_temp,&#10;  feels_like: response.body.feels_like&#10;}\" />\n          <zeebe:header key=\"retryBackoff\" value=\"PT0S\" />\n        </zeebe:taskHeaders>\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_0z7iuf8</bpmn:incoming>\n      <bpmn:outgoing>Flow_1q12hk9</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_1q12hk9\" sourceRef=\"Activity_1p1d6md\" targetRef=\"Activity_0p6cadr\" />\n    <bpmn:endEvent id=\"Event_17dzijs\">\n      <bpmn:incoming>Flow_0p8n1rh</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0p8n1rh\" sourceRef=\"Activity_0p6cadr\" targetRef=\"Event_17dzijs\" />\n    <bpmn:serviceTask id=\"Activity_0p6cadr\" name=\"Get the variables to the app\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"service-task\" />\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_1q12hk9</bpmn:incoming>\n      <bpmn:outgoing>Flow_0p8n1rh</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_0z7iuf8\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_1p1d6md\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"Process_0hjztfx\">\n      <bpmndi:BPMNShape id=\"Event_1xb1vte_di\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"172\" y=\"100\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"159\" y=\"143\" width=\"63\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1ned5n3_di\" bpmnElement=\"Activity_1p1d6md\">\n        <dc:Bounds x=\"330\" y=\"78\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_17dzijs_di\" bpmnElement=\"Event_17dzijs\">\n        <dc:Bounds x=\"792\" y=\"100\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1dqkia8_di\" bpmnElement=\"Activity_0p6cadr\">\n        <dc:Bounds x=\"560\" y=\"78\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_1q12hk9_di\" bpmnElement=\"Flow_1q12hk9\">\n        <di:waypoint x=\"430\" y=\"118\" />\n        <di:waypoint x=\"560\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0p8n1rh_di\" bpmnElement=\"Flow_0p8n1rh\">\n        <di:waypoint x=\"660\" y=\"118\" />\n        <di:waypoint x=\"792\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0z7iuf8_di\" bpmnElement=\"Flow_0z7iuf8\">\n        <di:waypoint x=\"208\" y=\"118\" />\n        <di:waypoint x=\"330\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
+        "tableColumns": {
+          "includeNewVariables": false,
+          "excludedColumns": [],
+          "includedColumns": [],
+          "columnOrder": []
+        },
+        "targetValue": {
+          "countChart": {
+            "isBelow": false,
+            "value": "100"
+          },
+          "durationProgress": {
+            "baseline": {
+              "unit": "hours",
+              "value": "0"
+            },
+            "target": {
+              "unit": "hours",
+              "value": "2",
+              "isBelow": false
+            }
+          },
+          "active": false,
+          "countProgress": {
+            "baseline": "0",
+            "target": "100",
+            "isBelow": false
+          },
+          "durationChart": {
+            "unit": "hours",
+            "isBelow": false,
+            "value": "2"
+          },
+          "isKpi": null
+        },
+        "heatmapTargetValue": {
+          "active": false,
+          "values": {}
+        },
+        "groupByDateVariableUnit": "automatic",
+        "distributeByDateVariableUnit": "automatic",
+        "customBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": null,
+          "baseline": "0.0",
+          "baselineUnit": null
+        },
+        "distributeByCustomBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": null,
+          "baseline": "0.0",
+          "baselineUnit": null
+        },
+        "sorting": {
+          "by": "key",
+          "order": "desc"
+        },
+        "processPart": null,
+        "measureVisualizations": {
+          "frequency": "bar",
+          "duration": "line"
+        },
+        "stackedBar": false,
+        "horizontalBar": false,
+        "logScale": false,
+        "yLabel": "",
+        "xLabel": "None"
+      },
+      "definitions": [
+        {
+          "identifier": "definition",
+          "key": "Process_0hjztfx",
+          "name": "Weather Checker 2",
+          "displayName": "Weather Checker 2",
+          "versions": [
+            "all"
+          ],
+          "tenantIds": [
+            "<default>"
+          ]
+        }
+      ],
+      "filter": [],
+      "view": {
+        "entity": "variable",
+        "properties": [
+          {
+            "name": "min_temp",
+            "type": "Double"
+          }
+        ]
+      },
+      "groupBy": {
+        "type": "none",
+        "value": null
+      },
+      "distributedBy": {
+        "type": "none",
+        "value": null
+      },
+      "visualization": "number",
+      "managementReport": false,
+      "instantPreviewReport": false,
+      "userTaskReport": false
+    }
+  },
+  {
+    "id": "5d0fc872-0c36-458b-a972-d81782745cbd",
+    "exportEntityType": "single_process_report",
+    "name": "Average Max Temperature",
+    "description": null,
+    "sourceIndexVersion": 11,
+    "collectionId": null,
+    "data": {
+      "configuration": {
+        "color": "#1991c8",
+        "aggregationTypes": [
+          {
+            "type": "avg",
+            "value": null
+          }
+        ],
+        "userTaskDurationTimes": [
+          "total"
+        ],
+        "showInstanceCount": false,
+        "pointMarkers": true,
+        "precision": null,
+        "hideRelativeValue": false,
+        "hideAbsoluteValue": false,
+        "alwaysShowRelative": false,
+        "alwaysShowAbsolute": false,
+        "showGradientBars": true,
+        "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" xmlns:zeebe=\"http://camunda.org/schema/zeebe/1.0\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" id=\"Definitions_1\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Web Modeler\" exporterVersion=\"b1a091a\" modeler:executionPlatform=\"Camunda Cloud\" modeler:executionPlatformVersion=\"8.5.0\" camunda:diagramRelationId=\"aa636b87-5ad6-40bb-89da-42fcd1b8f783\">\n  <bpmn:process id=\"node-slackbot-demo\" name=\"Weather Reporter\" isExecutable=\"true\">\n    <bpmn:startEvent id=\"StartEvent_1\" name=\"Start process with specific city\">\n      <bpmn:extensionElements />\n      <bpmn:outgoing>Flow_0z7iuf8</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:serviceTask id=\"Activity_1p1d6md\" name=\"Check the weather\" zeebe:modelerTemplate=\"io.camunda.connectors.HttpJson.v2\" zeebe:modelerTemplateVersion=\"7\" zeebe:modelerTemplateIcon=\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"io.camunda:http-json:1\" retries=\"3\" />\n        <zeebe:ioMapping>\n          <zeebe:input source=\"noAuth\" target=\"authentication.type\" />\n          <zeebe:input source=\"GET\" target=\"method\" />\n          <zeebe:input source=\"=&#34;https://api.api-ninjas.com/v1/weather?city=&#34; + city\" target=\"url\" />\n          <zeebe:input source=\"= {X-Api-Key: &#34;{{secrets.ApiNinja}}&#34; } \" target=\"queryParameters\" />\n          <zeebe:input source=\"20\" target=\"connectionTimeoutInSeconds\" />\n          <zeebe:input source=\"20\" target=\"readTimeoutInSeconds\" />\n        </zeebe:ioMapping>\n        <zeebe:taskHeaders>\n          <zeebe:header key=\"resultVariable\" value=\"result\" />\n          <zeebe:header key=\"resultExpression\" value=\"={&#10;temperature: response.body.temp,&#10;  max_temp: response.body.max_temp,&#10;  min_temp: response.body.min_temp,&#10;  feels_like: response.body.feels_like&#10;}\" />\n          <zeebe:header key=\"retryBackoff\" value=\"PT0S\" />\n        </zeebe:taskHeaders>\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_0z7iuf8</bpmn:incoming>\n      <bpmn:outgoing>Flow_1q12hk9</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_1q12hk9\" sourceRef=\"Activity_1p1d6md\" targetRef=\"Activity_0p6cadr\" />\n    <bpmn:endEvent id=\"Event_17dzijs\" name=\"End Process\">\n      <bpmn:incoming>Flow_0p8n1rh</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0p8n1rh\" sourceRef=\"Activity_0p6cadr\" targetRef=\"Event_17dzijs\" />\n    <bpmn:serviceTask id=\"Activity_0p6cadr\" name=\"Report weather to user\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"service-task\" />\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_1q12hk9</bpmn:incoming>\n      <bpmn:outgoing>Flow_0p8n1rh</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_0z7iuf8\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_1p1d6md\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"node-slackbot-demo\">\n      <bpmndi:BPMNShape id=\"Event_1xb1vte_di\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"172\" y=\"100\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"147\" y=\"143\" width=\"88\" height=\"27\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1ned5n3_di\" bpmnElement=\"Activity_1p1d6md\">\n        <dc:Bounds x=\"330\" y=\"78\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_17dzijs_di\" bpmnElement=\"Event_17dzijs\">\n        <dc:Bounds x=\"792\" y=\"100\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"779\" y=\"143\" width=\"63\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1dqkia8_di\" bpmnElement=\"Activity_0p6cadr\">\n        <dc:Bounds x=\"560\" y=\"78\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_1q12hk9_di\" bpmnElement=\"Flow_1q12hk9\">\n        <di:waypoint x=\"430\" y=\"118\" />\n        <di:waypoint x=\"560\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0p8n1rh_di\" bpmnElement=\"Flow_0p8n1rh\">\n        <di:waypoint x=\"660\" y=\"118\" />\n        <di:waypoint x=\"792\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0z7iuf8_di\" bpmnElement=\"Flow_0z7iuf8\">\n        <di:waypoint x=\"208\" y=\"118\" />\n        <di:waypoint x=\"330\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
+        "tableColumns": {
+          "includeNewVariables": false,
+          "excludedColumns": [],
+          "includedColumns": [],
+          "columnOrder": []
+        },
+        "targetValue": {
+          "countChart": {
+            "isBelow": false,
+            "value": "100"
+          },
+          "durationProgress": {
+            "baseline": {
+              "unit": "hours",
+              "value": "0"
+            },
+            "target": {
+              "unit": "hours",
+              "value": "2",
+              "isBelow": false
+            }
+          },
+          "active": false,
+          "countProgress": {
+            "baseline": "0",
+            "target": "100",
+            "isBelow": false
+          },
+          "durationChart": {
+            "unit": "hours",
+            "isBelow": false,
+            "value": "2"
+          },
+          "isKpi": null
+        },
+        "heatmapTargetValue": {
+          "active": false,
+          "values": {}
+        },
+        "groupByDateVariableUnit": "automatic",
+        "distributeByDateVariableUnit": "automatic",
+        "customBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": null,
+          "baseline": "0.0",
+          "baselineUnit": null
+        },
+        "distributeByCustomBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": null,
+          "baseline": "0.0",
+          "baselineUnit": null
+        },
+        "sorting": {
+          "by": "key",
+          "order": "desc"
+        },
+        "processPart": null,
+        "measureVisualizations": {
+          "frequency": "bar",
+          "duration": "line"
+        },
+        "stackedBar": false,
+        "horizontalBar": false,
+        "logScale": false,
+        "yLabel": "Flow node Duration",
+        "xLabel": "None"
+      },
+      "definitions": [
+        {
+          "identifier": "definition",
+          "key": "node-slackbot-demo",
+          "name": "Weather Reporter",
+          "displayName": "Weather Reporter",
+          "versions": [
+            "all"
+          ],
+          "tenantIds": [
+            "<default>"
+          ]
+        }
+      ],
+      "filter": [],
+      "view": {
+        "entity": "variable",
+        "properties": [
+          {
+            "name": "max_temp",
+            "type": "Double"
+          }
+        ]
+      },
+      "groupBy": {
+        "type": "none",
+        "value": null
+      },
+      "distributedBy": {
+        "type": "none",
+        "value": null
+      },
+      "visualization": "number",
+      "managementReport": false,
+      "instantPreviewReport": false,
+      "userTaskReport": false
+    }
+  },
+  {
+    "id": "e25f1a5a-4863-499e-b76f-89bd9dd3b1cf",
+    "exportEntityType": "single_process_report",
+    "name": "Average Temperature Reported",
+    "description": null,
+    "sourceIndexVersion": 11,
+    "collectionId": null,
+    "data": {
+      "configuration": {
+        "color": "#1991c8",
+        "aggregationTypes": [
+          {
+            "type": "avg",
+            "value": null
+          }
+        ],
+        "userTaskDurationTimes": [
+          "total"
+        ],
+        "showInstanceCount": false,
+        "pointMarkers": true,
+        "precision": null,
+        "hideRelativeValue": false,
+        "hideAbsoluteValue": false,
+        "alwaysShowRelative": false,
+        "alwaysShowAbsolute": false,
+        "showGradientBars": true,
+        "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" xmlns:zeebe=\"http://camunda.org/schema/zeebe/1.0\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" id=\"Definitions_1\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Web Modeler\" exporterVersion=\"b1a091a\" modeler:executionPlatform=\"Camunda Cloud\" modeler:executionPlatformVersion=\"8.5.0\" camunda:diagramRelationId=\"aa636b87-5ad6-40bb-89da-42fcd1b8f783\">\n  <bpmn:process id=\"node-slackbot-demo\" name=\"Weather Reporter\" isExecutable=\"true\">\n    <bpmn:startEvent id=\"StartEvent_1\" name=\"Start process with specific city\">\n      <bpmn:extensionElements />\n      <bpmn:outgoing>Flow_0z7iuf8</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:serviceTask id=\"Activity_1p1d6md\" name=\"Check the weather\" zeebe:modelerTemplate=\"io.camunda.connectors.HttpJson.v2\" zeebe:modelerTemplateVersion=\"7\" zeebe:modelerTemplateIcon=\"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"io.camunda:http-json:1\" retries=\"3\" />\n        <zeebe:ioMapping>\n          <zeebe:input source=\"noAuth\" target=\"authentication.type\" />\n          <zeebe:input source=\"GET\" target=\"method\" />\n          <zeebe:input source=\"=&#34;https://api.api-ninjas.com/v1/weather?city=&#34; + city\" target=\"url\" />\n          <zeebe:input source=\"= {X-Api-Key: &#34;{{secrets.ApiNinja}}&#34; } \" target=\"queryParameters\" />\n          <zeebe:input source=\"20\" target=\"connectionTimeoutInSeconds\" />\n          <zeebe:input source=\"20\" target=\"readTimeoutInSeconds\" />\n        </zeebe:ioMapping>\n        <zeebe:taskHeaders>\n          <zeebe:header key=\"resultVariable\" value=\"result\" />\n          <zeebe:header key=\"resultExpression\" value=\"={&#10;temperature: response.body.temp,&#10;  max_temp: response.body.max_temp,&#10;  min_temp: response.body.min_temp,&#10;  feels_like: response.body.feels_like&#10;}\" />\n          <zeebe:header key=\"retryBackoff\" value=\"PT0S\" />\n        </zeebe:taskHeaders>\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_0z7iuf8</bpmn:incoming>\n      <bpmn:outgoing>Flow_1q12hk9</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_1q12hk9\" sourceRef=\"Activity_1p1d6md\" targetRef=\"Activity_0p6cadr\" />\n    <bpmn:endEvent id=\"Event_17dzijs\" name=\"End Process\">\n      <bpmn:incoming>Flow_0p8n1rh</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0p8n1rh\" sourceRef=\"Activity_0p6cadr\" targetRef=\"Event_17dzijs\" />\n    <bpmn:serviceTask id=\"Activity_0p6cadr\" name=\"Report weather to user\">\n      <bpmn:extensionElements>\n        <zeebe:taskDefinition type=\"service-task\" />\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_1q12hk9</bpmn:incoming>\n      <bpmn:outgoing>Flow_0p8n1rh</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_0z7iuf8\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_1p1d6md\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"node-slackbot-demo\">\n      <bpmndi:BPMNShape id=\"Event_1xb1vte_di\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"172\" y=\"100\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"147\" y=\"143\" width=\"88\" height=\"27\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1ned5n3_di\" bpmnElement=\"Activity_1p1d6md\">\n        <dc:Bounds x=\"330\" y=\"78\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_17dzijs_di\" bpmnElement=\"Event_17dzijs\">\n        <dc:Bounds x=\"792\" y=\"100\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"779\" y=\"143\" width=\"63\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1dqkia8_di\" bpmnElement=\"Activity_0p6cadr\">\n        <dc:Bounds x=\"560\" y=\"78\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_1q12hk9_di\" bpmnElement=\"Flow_1q12hk9\">\n        <di:waypoint x=\"430\" y=\"118\" />\n        <di:waypoint x=\"560\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0p8n1rh_di\" bpmnElement=\"Flow_0p8n1rh\">\n        <di:waypoint x=\"660\" y=\"118\" />\n        <di:waypoint x=\"792\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0z7iuf8_di\" bpmnElement=\"Flow_0z7iuf8\">\n        <di:waypoint x=\"208\" y=\"118\" />\n        <di:waypoint x=\"330\" y=\"118\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
+        "tableColumns": {
+          "includeNewVariables": false,
+          "excludedColumns": [],
+          "includedColumns": [],
+          "columnOrder": []
+        },
+        "targetValue": {
+          "countChart": {
+            "isBelow": false,
+            "value": "100"
+          },
+          "durationProgress": {
+            "baseline": {
+              "unit": "hours",
+              "value": "0"
+            },
+            "target": {
+              "unit": "hours",
+              "value": "2",
+              "isBelow": false
+            }
+          },
+          "active": false,
+          "countProgress": {
+            "baseline": "0",
+            "target": "100",
+            "isBelow": false
+          },
+          "durationChart": {
+            "unit": "hours",
+            "isBelow": false,
+            "value": "2"
+          },
+          "isKpi": false
+        },
+        "heatmapTargetValue": {
+          "active": false,
+          "values": {}
+        },
+        "groupByDateVariableUnit": "automatic",
+        "distributeByDateVariableUnit": "automatic",
+        "customBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": "minute",
+          "baseline": "0.0",
+          "baselineUnit": "minute"
+        },
+        "distributeByCustomBucket": {
+          "active": false,
+          "bucketSize": "10.0",
+          "bucketSizeUnit": "minute",
+          "baseline": "0.0",
+          "baselineUnit": "minute"
+        },
+        "sorting": {
+          "by": "key",
+          "order": "desc"
+        },
+        "processPart": null,
+        "measureVisualizations": {
+          "frequency": "bar",
+          "duration": "line"
+        },
+        "stackedBar": false,
+        "horizontalBar": false,
+        "logScale": false,
+        "yLabel": "User task Count",
+        "xLabel": "None"
+      },
+      "definitions": [
+        {
+          "identifier": "definition",
+          "key": "node-slackbot-demo",
+          "name": "Weather Reporter",
+          "displayName": "Weather Reporter",
+          "versions": [
+            "all"
+          ],
+          "tenantIds": [
+            "<default>"
+          ]
+        }
+      ],
+      "filter": [],
+      "view": {
+        "entity": "variable",
+        "properties": [
+          {
+            "name": "temperature",
+            "type": "Double"
+          }
+        ]
+      },
+      "groupBy": {
+        "type": "none",
+        "value": null
+      },
+      "distributedBy": {
+        "type": "none",
+        "value": null
+      },
+      "visualization": "number",
+      "managementReport": false,
+      "instantPreviewReport": false,
+      "userTaskReport": false
+    }
+  },
+  {
+    "id": "35b34fb3-ecf6-40ed-98cc-02c37afff40f",
+    "exportEntityType": "dashboard",
+    "name": "Weather Reporter Slackbot",
+    "description": null,
+    "sourceIndexVersion": 8,
+    "tiles": [
+      {
+        "id": "e25f1a5a-4863-499e-b76f-89bd9dd3b1cf",
+        "position": {
+          "x": 6,
+          "y": 0
+        },
+        "dimensions": {
+          "width": 4,
+          "height": 4
+        },
+        "type": "optimize_report",
+        "configuration": null
+      },
+      {
+        "id": "0b755041-1edc-4c15-8008-edbf45e9d7d3",
+        "position": {
+          "x": 0,
+          "y": 4
+        },
+        "dimensions": {
+          "width": 10,
+          "height": 4
+        },
+        "type": "optimize_report",
+        "configuration": null
+      },
+      {
+        "id": "7530f4cf-b68b-4de5-9114-e8e0974177e0",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "dimensions": {
+          "width": 6,
+          "height": 4
+        },
+        "type": "optimize_report",
+        "configuration": null
+      },
+      {
+        "id": "fdf3f09f-314a-4f04-99ee-882de2990200",
+        "position": {
+          "x": 10,
+          "y": 4
+        },
+        "dimensions": {
+          "width": 8,
+          "height": 4
+        },
+        "type": "optimize_report",
+        "configuration": null
+      },
+      {
+        "id": "5d0fc872-0c36-458b-a972-d81782745cbd",
+        "position": {
+          "x": 10,
+          "y": 0
+        },
+        "dimensions": {
+          "width": 4,
+          "height": 4
+        },
+        "type": "optimize_report",
+        "configuration": null
+      },
+      {
+        "id": "74794b17-3259-47a5-abe7-a6a80f762ca3",
+        "position": {
+          "x": 14,
+          "y": 0
+        },
+        "dimensions": {
+          "width": 4,
+          "height": 4
+        },
+        "type": "optimize_report",
+        "configuration": null
+      }
+    ],
+    "availableFilters": [],
+    "collectionId": null,
+    "instantPreviewDashboard": false
+  }
+]
