@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="b1a091a" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" camunda:diagramRelationId="aa636b87-5ad6-40bb-89da-42fcd1b8f783">
-  <bpmn:process id="node-slackbot-demo" name="Weather Reporter" isExecutable="true">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="3d11eee" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" camunda:diagramRelationId="aa636b87-5ad6-40bb-89da-42fcd1b8f783">
+  <bpmn:process id="node-slackbot" name="Weather Checker" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1" name="Start process with specific city">
       <bpmn:extensionElements />
       <bpmn:outgoing>Flow_0z7iuf8</bpmn:outgoing>
@@ -11,14 +11,13 @@
         <zeebe:ioMapping>
           <zeebe:input source="noAuth" target="authentication.type" />
           <zeebe:input source="GET" target="method" />
-          <zeebe:input source="=&#34;https://api.api-ninjas.com/v1/weather?city=&#34; + city" target="url" />
-          <zeebe:input source="= {X-Api-Key: &#34;{{secrets.ApiNinja}}&#34; } " target="queryParameters" />
+          <zeebe:input source="=&#34;https://api.weatherbit.io/v2.0/current?city=&#34; + city + &#34;&#38;key={{secrets.WeatherBit}}&#34;" target="url" />
           <zeebe:input source="20" target="connectionTimeoutInSeconds" />
           <zeebe:input source="20" target="readTimeoutInSeconds" />
         </zeebe:ioMapping>
         <zeebe:taskHeaders>
           <zeebe:header key="resultVariable" value="result" />
-          <zeebe:header key="resultExpression" value="={&#10;temperature: response.body.temp,&#10;  max_temp: response.body.max_temp,&#10;  min_temp: response.body.min_temp,&#10;  feels_like: response.body.feels_like&#10;}" />
+          <zeebe:header key="resultExpression" value="={&#10;temperature: response.body.data.temp,&#10;  feels_like: response.body.data.app_temp&#10;}" />
           <zeebe:header key="retryBackoff" value="PT0S" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>
@@ -40,7 +39,7 @@
     <bpmn:sequenceFlow id="Flow_0z7iuf8" sourceRef="StartEvent_1" targetRef="Activity_1p1d6md" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="node-slackbot-demo">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="node-slackbot">
       <bpmndi:BPMNShape id="Event_1xb1vte_di" bpmnElement="StartEvent_1">
         <dc:Bounds x="172" y="100" width="36" height="36" />
         <bpmndi:BPMNLabel>

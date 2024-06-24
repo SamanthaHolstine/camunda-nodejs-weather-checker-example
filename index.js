@@ -39,7 +39,7 @@ app.command("/weather", async ({ command, ack, say }) => {
         //Deploy the process
         async function deployProcess() {
             deploy = await zeebe.deployResource({
-                processFilename: path.join(process.cwd(), "weather-slackbot.bpmn"),
+                processFilename: path.join(process.cwd(), "weather-checker.bpmn"),
             });
             console.log(
                 `[Zeebe] Deployed process ${deploy.deployments[0].process.bpmnProcessId}`
@@ -50,7 +50,7 @@ app.command("/weather", async ({ command, ack, say }) => {
         async function main() {
             //Create a process instance with the deployed model above
             const p = await zeebe.createProcessInstanceWithResult({
-                bpmnProcessId: `node-slackbot-demo`,
+                bpmnProcessId: `node-slackbot`,
                 variables: {
                     city: city,
                 },
@@ -83,12 +83,12 @@ app.command("/weather", async ({ command, ack, say }) => {
             taskHandler: (job) => {
                 console.log(`[Zeebe Worker] handling job of type ${job.type}`);
 
-                const { temperature: temp, max_temp: maxTemp, min_temp: minTemp, feels_like: feelsLike, city: city } = job.variables;
+                const { temperature: temp, feels_like: feelsLike, city: city } = job.variables;
 
                 if (job.variables.city == null || job.variables.city == '') {
                     say(city + " is not a valid city")
                 } else {
-                    say("The temperature in " + city + " is currently " + temp + " degrees with a high of " + maxTemp + " degrees and a low of " + minTemp + " degrees. It feels like " + feelsLike + " degrees outside.");
+                    say("The temperature in " + city + " is currently " + temp + " degrees. It feels like " + feelsLike + " degrees outside.");
                 }
                 return job.complete({
                     serviceTaskOutcome: "Weather returned!",
